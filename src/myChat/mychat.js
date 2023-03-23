@@ -4,12 +4,13 @@ import React, { useState, useContext, useReducer, useEffect, useCallback, useRef
 import '../myChat/mychat.css'
 import apis from '../util/api/api'
 import ReactMarkdown from 'react-markdown';
-
 import remarkGfm from 'remark-gfm';// 划线、表、任务列表和直接url等的语法扩展
 import rehypeRaw from 'rehype-raw'// 解析标签，支持html语法
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter' // 代码高亮
 import 'github-markdown-css';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+
 const { TextArea } = Input;
 const AppContext = React.createContext({});
 let initState = {
@@ -106,7 +107,7 @@ const UserInput = () => {
                 clearTimeout(botSayTime);
                 dispatch({ type: 'botsaying', botSayingState: false })
             }
-        },100)
+        },80)
         
     }
     const commit = (e) => {
