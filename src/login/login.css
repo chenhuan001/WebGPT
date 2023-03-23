@@ -1,0 +1,40 @@
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+
+#components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+}
+
+#components-form-demo-normal-login .login-form-button {
+    width: 100%;
+}
+
+.login {
+    width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.or{
+    color: #fff;
+    margin-left: 1rem;
+}
+.register{
+ color: #409EFF;
+ cursor: pointer;
+}
+.ant-form-item-label > label{
+    color: #fff !important;
+}
+.ant-form-item-label > label .ant-form-item-tooltip{
+    color: #fff !important;
+}
+.margin-l{
+    margin-left: 2rem;
+}

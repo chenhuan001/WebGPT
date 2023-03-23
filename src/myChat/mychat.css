@@ -1,0 +1,61 @@
+.user-input {
+    width: 60%;
+    position: fixed;
+    left: 20%;
+    height: 5rem;
+    bottom: 0%;
+    background-color: #282c34;
+    z-index: 3;
+}
+.markdown-body{
+    padding-top: 1rem;
+    background-color: #282c34 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+}
+.loading {
+    width: 60%;
+    margin: 0 20%;
+    text-align: center;
+}
+
+.user {
+    width: 60%;
+    margin: 0 20%;
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    padding-top: 1rem;
+}
+
+.bot {
+    width: 60%;
+    margin: 0 20%;
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    padding-top: 1rem;
+}
+
+.user-img {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.context {
+    flex: 1;
+    word-break: break-all;
+    padding-top: 1rem;
+}
+
+.content-manage {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /* firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 10rem;
+}
