@@ -1,5 +1,5 @@
 
-import { Input, Spin } from 'antd';
+import { Input, Spin,message } from 'antd';
 import React, { useState, useContext, useReducer, useEffect, useCallback, useRef } from 'react'
 import '../myChat/mychat.css'
 import apis from '../util/api/api'
@@ -8,7 +8,8 @@ import remarkGfm from 'remark-gfm';// 划线、表、任务列表和直接url等
 import rehypeRaw from 'rehype-raw'// 解析标签，支持html语法
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter' // 代码高亮
 import 'github-markdown-css';
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
 
 
 const { TextArea } = Input;
@@ -66,7 +67,7 @@ const SessionList = () => {
                                         return !inline && match ? (
                                             <SyntaxHighlighter
                                                 children={String(children).replace(/\n$/, '')}
-                                                style={tomorrow}
+                                                style={dark}
                                                 language={match[1]}
                                                 PreTag="div"
                                                 {...props}
@@ -125,12 +126,7 @@ const UserInput = () => {
         dispatch({ type: 'loading', isLoading: true })
         console.log(state.loading, 'sessionsession')
         apis.commit({
-            model: 'gpt-3.5-turbo',
-            messages: [{
-                role: 'user',
-                content: val
-            }
-            ]
+            ques:val
         }).then(res => {
             dispatch({ type: 'loading', isLoading: false })
             let newSessionListFromBot = [...newSessionList];
@@ -142,6 +138,9 @@ const UserInput = () => {
             //     content: res.data.content
             // })
             // dispatch({ type: 'session', sessionList: newSessionListFromBot });
+        }).catch(res=>{
+            dispatch({ type: 'loading', isLoading: false })
+            message.warning('出错了~');
         })
     }
     return (
@@ -166,7 +165,8 @@ const MyChat = () => {
                 state,
                 dispatch
             }}>
-                <SessionList></SessionList>
+                <SessionList>
+                </SessionList>
                 <MySpin />
                 <UserInput></UserInput>
             </AppContext.Provider>

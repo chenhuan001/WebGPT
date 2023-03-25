@@ -1,31 +1,37 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input,message } from 'antd';
 import '../login/login.css'
 import React from 'react';
-import { useState, useRef } from 'react'
+import { useState, useRef,useEffect} from 'react'
 import apis from '../util/api/api'
 
 import { useNavigate } from 'react-router-dom'
 
 const App = () => {
+    let [loginOrRegister, setloginOrRegister] = useState(0);
     const [form] = Form.useForm();
     const loginForm = useRef(null)
     const registerForm = useRef(null)
     const history = useNavigate();
     const login = (values) => {
-        // apis.login(values).then(res=>{
-        //     // if(res.data.code == 200){
-
-        //     // }
-        // })
-        history('/home')
+        console.log(useNavigate)
+        apis.login(values).then(res=>{
+            if(res.status == 200){
+                // sessionStorage.setItem('token',res.data.token);
+                history('/home')
+            }
+        })
     };
     const register = (values) => {
         apis.register(values).then(res=>{
-
+            if(res.status == 200){
+                // sessionStorage.setItem('token',res.data.token);
+                // history('/home')
+                message.success('注册成功');
+            setloginOrRegister(0)
+            }
         })
     };
-    let [loginOrRegister, setloginOrRegister] = useState(0);
     const formItemLayout = {
         labelCol: {
             xs: { span: 24 },
@@ -48,6 +54,12 @@ const App = () => {
             },
         },
     };
+    useEffect(()=>{
+        const userToken = sessionStorage.getItem('token');
+        if(userToken){
+            history('/home')
+        }
+    },[])
     return (
         <div className='login'>
             {loginOrRegister == 0 ? (
@@ -103,16 +115,14 @@ const App = () => {
                     scrollToFirstError
                 >
                     <Form.Item
-                        name="email"
-                        label="邮箱"
+                        name="nickname"
+                        label="用户名"
+                        tooltip="你希望别人用什么名字来称呼你?"
                         rules={[
                             {
-                                type: 'email',
-                                message: '邮箱格式有误!',
-                            },
-                            {
                                 required: true,
-                                message: '请输入邮箱!',
+                                message: '请输入用户名!',
+                                whitespace: true,
                             },
                         ]}
                     >
@@ -157,14 +167,16 @@ const App = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="nickname"
-                        label="用户名"
-                        tooltip="你希望别人用什么名字来称呼你?"
+                        name="email"
+                        label="邮箱"
                         rules={[
                             {
+                                type: 'email',
+                                message: '邮箱格式有误!',
+                            },
+                            {
                                 required: true,
-                                message: '请输入用户名!',
-                                whitespace: true,
+                                message: '请输入邮箱!',
                             },
                         ]}
                     >
