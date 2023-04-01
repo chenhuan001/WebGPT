@@ -27,6 +27,7 @@ const App = () => {
             if(res.status == 200){
                 // sessionStorage.setItem('token',res.data.token);
                 // history('/home')
+                
                 message.success('注册成功');
             setloginOrRegister(0)
             }
